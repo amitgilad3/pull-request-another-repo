@@ -16,6 +16,9 @@ inputs:
   user_name:
     description: 'GitHub username for the commit'
     required: true
+  commit_message:
+    description: 'commit message when pushing the code'  
+    required: false
   destination_head_branch:
     description: 'The branch to create to push the changes. Cannot be master or main'
     required: true
@@ -35,6 +38,7 @@ runs:
     - ${{ inputs.destination-folder }}
     - ${{ inputs.user-email }}
     - ${{ inputs.user-name }}
+    - ${{ inputs.commit-message }}
     - ${{ inputs.destination-head-branch }}
     - ${{ inputs.destination-base-branch }}
     - ${{ inputs.pull-request-reviewers }}

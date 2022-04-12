@@ -22,6 +22,14 @@ else
   PULL_REQUEST_REVIEWERS='-r '$INPUT_PULL_REQUEST_REVIEWERS
 fi
 
+if [ -z "$INPUT_COMMIT_MESSAGE" ]
+then
+  COMMIT_MESSAGE = "Update from https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
+else
+  COMMIT_MESSAGE = $INPUT_COMMIT_MESSAGE
+fi
+
+
 CLONE_DIR=$(mktemp -d)
 
 echo "Setting git variables"
@@ -34,7 +42,7 @@ git clone "https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$C
 
 echo "Copying contents to git repo"
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER/
-cp $INPUT_SOURCE_FOLDER "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
+cp -R $INPUT_SOURCE_FOLDER "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 cd "$CLONE_DIR"
 git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
 
@@ -42,7 +50,7 @@ echo "Adding git commit"
 git add .
 if git status | grep -q "Changes to be committed"
 then
-  git commit --message "Update from https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
+  git commit --message $COMMIT_MESSAGE
   echo "Pushing git commit"
   git push -u origin HEAD:$INPUT_DESTINATION_HEAD_BRANCH
   echo "Creating a pull request"
