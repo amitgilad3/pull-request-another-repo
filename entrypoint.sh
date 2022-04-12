@@ -24,9 +24,9 @@ fi
 
 if [ -z "$INPUT_COMMIT_MESSAGE" ]
 then
-  COMMIT_MESSAGE = "Update from https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
+  COMMIT_MESSAGE="Update from https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
 else
-  COMMIT_MESSAGE = $INPUT_COMMIT_MESSAGE
+  COMMIT_MESSAGE=$INPUT_COMMIT_MESSAGE
 fi
 
 
