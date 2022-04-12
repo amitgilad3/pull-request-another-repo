@@ -26,6 +26,7 @@ This GitHub Action copies a folder from the current repository to a location in 
             user_email: 'user-name@paygo.com.br'
             user_name: 'user-name'
             pull_request_reviewers: 'reviewers'
+            commit_message: 'update code'
 
 ## Variables
 * source_folder: The folder to be moved. Uses the same syntax as the `cp` command. Incude the path for any files not in the repositories root directory.
